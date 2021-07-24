@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+const emailRoute = require("./routes/emailRoute");
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
+
+app.use("/email", emailRoute);
 
 // error handling
 app.use((error, req, res, next) => {
@@ -21,8 +24,8 @@ app.use((error, req, res, next) => {
 });
 
 const startServer = () => {
-  const PORT = process.env.EMAIL || "3000";
-  app.listen(process.env.EMAIL, () => {
+  const PORT = process.env.SERVER_PORT || "3000";
+  app.listen(PORT, () => {
     console.log(`Service Email listening at PORT ${PORT}`);
   });
 };
