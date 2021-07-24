@@ -23,7 +23,7 @@ app.use((error, req, res, next) => {
 const startServer = () => {
   const PORT = process.env.SERVER_PORT || "3000";
   app.listen(PORT, () => {
-    console.log(`Service Email listening at PORT ${PORT}`);
+    console.log(`Service Soal listening at PORT ${PORT}`);
   });
 };
 
