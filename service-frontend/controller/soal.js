@@ -44,6 +44,7 @@ exports.acakSoal = async (req, res, next) => {
             throw error
         }
         const email  = req.body.email
+        const jumlahAcak = req.body.jumlahAcak
         res.json({
             message: `hasil acak soal akan dikirim ke ${email}`
         })

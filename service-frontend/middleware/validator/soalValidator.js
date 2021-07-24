@@ -49,7 +49,18 @@ const acakSoalValidator = () => {
         body("email")
             .trim()
             .notEmpty().withMessage("Email tidak boleh kosong")
-            .isEmail().withMessage("Format email tidak valid")
+            .isEmail().withMessage("Format email tidak valid"),
+        body("jumlahAcak")
+            .notEmpty().withMessage("Jumlah acak tidak boleh kosong")
+            .isInt().withMessage("Jumlah acak soal adalah angka")
+            .custom((value) => {
+                if(value > 5){
+                    throw new Error("Maksimal Jumlah acak adalah 5");
+                }else if(value < 1){
+                    throw new Error("Minimal Jumlah acak adalah 1")
+                }
+                return true
+            })
         ]
 }
 
