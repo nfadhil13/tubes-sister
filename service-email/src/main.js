@@ -24,8 +24,8 @@ app.use((error, req, res, next) => {
 });
 
 const startServer = () => {
-  const PORT = process.env.EMAIL || "3000";
-  app.listen(process.env.EMAIL, () => {
+  const PORT = process.env.SERVER_PORT || "3000";
+  app.listen(PORT, () => {
     console.log(`Service Email listening at PORT ${PORT}`);
   });
 };
