@@ -67,6 +67,7 @@ const startServer = async () => {
     }
   });
   app.listen(PORT, () => {
+    console.log(process.env.EMAIL);
     console.log(`Service Email listening at PORT ${PORT}`);
   });
 };
