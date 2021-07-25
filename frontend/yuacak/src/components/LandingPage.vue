@@ -13,7 +13,7 @@
         <div class="text-center text-caption font-weight-regular">Mohamad Naufal Fadhil (181524016)</div>
       </v-col>
       <v-col cols="12">
-        <div class="text-center text-caption font-weight-regular">Rayhan Azka Anandhias (181524027)</div>
+        <div class="text-center text-caption font-weight-regular">Rayhan Azka Anandhias Putra(181524028)</div>
       </v-col>
       <v-col cols="12">
         <div class="d-flex justify-center">
