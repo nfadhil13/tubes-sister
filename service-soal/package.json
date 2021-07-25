@@ -11,9 +11,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "adm-zip": "^0.5.5",
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.12"
+    "jsdom": "^16.6.0",
+    "nodejs-file-downloader": "^4.7.1",
+    "nodemon": "^2.0.12",
+    "shuffle-array": "^1.0.1",
+    "strip-html-comments": "^1.0.0",
+    "tabletojson": "^2.0.7",
+    "uuid": "^8.3.2"
   }
 }
