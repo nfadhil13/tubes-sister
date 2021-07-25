@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
+const path = require("path");
 
 const smtpConfig = {
   host: "smtp.gmail.com",
@@ -53,11 +54,11 @@ exports.sendUrlAcakSoal = async (urlSoal, recipient) => {
 const handlebarOptions = {
   viewEngine: {
     extName: ".handlebars",
-    partialsDir: "utils/views/partials",
-    layoutsDir: "utils/views/layouts",
+    partialsDir: path.join(__dirname, "/views/partials"),
+    layoutsDir: path.join(__dirname, "/views/layouts"),
     defaultLayout: ""
   },
-  viewPath: "utils/views/template",
+  viewPath: path.join(__dirname, "/views/template"),
   extName: ".handlebars"
 };
 
