@@ -2,16 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const soalRoute = require("./routes/soal");
 const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 
+app.use(
+  "docx",
+  express.static(path.join(__dirname, "public", "docx", "hasil-acak"))
+);
+
 app.use(express.json());
 
 app.use(morgan("dev"));
 
-app.use("/soal", soalRoute);
+app.use("/", soalRoute);
 
 // error handling
 app.use((error, req, res, next) => {
