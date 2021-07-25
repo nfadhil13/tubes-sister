@@ -47,6 +47,8 @@ const downloadFile = async (fileUrl, outputLocationPath) => {
 };
 
 const fromWebPageParser = async (htmlFile) => {
+  console.log("html file adalah")
+  console.log(htmlFile)
   const html = await fs.promises.readFile(htmlFile, "utf8");
   console.log("html adalah")
   console.log(html)
