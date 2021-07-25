@@ -10,12 +10,12 @@ app.use(cors());
 
 app.use(
   "/template",
-  express.static(path.join(__dirname, "/public/docx/template-soal"))
+  express.static(path.join(__dirname, "../public/docx/template-soal"))
 );
 
 app.use(
   "/docx",
-  express.static(path.join(__dirname, "/public/docx/hasil-acak"))
+  express.static(path.join(__dirname, "../public/docx/hasil-acak"))
 );
 
 app.use(express.json());
