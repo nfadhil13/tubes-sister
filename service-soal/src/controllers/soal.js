@@ -16,6 +16,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     const tabel = [];
     const pilihan = [];
 
+    console.log("Jumlah pilihan adalah " + jumlahPilihan)
     for (let j = 0; j < jumlahPilihan; j++) {
       pilihan.push(
         createRow(
