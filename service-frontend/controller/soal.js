@@ -1,6 +1,7 @@
 const {validationResult} = require("express-validator")
 const path = require("path")
 const fs = require("fs")
+const MessageBroker = require("../util/rabbitmq/MessageBroker")
 
 exports.generateTemplate = async (req, res, next) => {
     try{
@@ -16,10 +17,16 @@ exports.generateTemplate = async (req, res, next) => {
         const totalSoal = req.body.totalSoal
         const totalPilihan = req.body.totalPilihan
         const totalPaket = req.body.paket
-        //Request to rabbit mq
         res.json({
             message: `template akan dikirim ke ${email}`
         })
+        const broker = await MessageBroker.getInstance()
+        await broker.sendMessage("soalserivce/generate-template", Buffer.from(JSON.stringify({
+            email,
+            totalSoal,
+            totalPilihan,
+            totalPaket
+        })))
     }catch (e) {
         next(e)
     }
@@ -48,6 +55,12 @@ exports.acakSoal = async (req, res, next) => {
         res.json({
             message: `hasil acak soal akan dikirim ke ${email}`
         })
+        const broker = await MessageBroker.getInstance()
+        await broker.sendMessage("soalserivce/generate-template", Buffer.from(JSON.stringify({
+            email,
+            jumlahAcak,
+            urlFile: filePath
+        })))
     }catch (e) {
         if(filePath!=null){
             deleteImage(filePath)
@@ -55,6 +68,8 @@ exports.acakSoal = async (req, res, next) => {
         next(e)
     }
 }
+
+
 
 const deleteImage = (filePath) => {
     filePath = path.join(__dirname, "..", filePath);

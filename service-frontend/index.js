@@ -2,18 +2,27 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const path = require("path")
-
+const cors = require("cors")
 const soalValidator = require("./middleware/validator/soalValidator")
 const soalController = require("./controller/soal")
 const docxMulter = require("./middleware/multer/docxupload")
+const corsOptionDelegate = (req , callback ) => {
+    callback(null , {
+        origin : req.header("Origin"),
+        credentials : true
+    })
+}
+
+const MessageBroker = require("./util/rabbitmq/MessageBroker")
 
 
 app.use(express.urlencoded())
 app.use(bodyParser.json());
+app.use(cors(corsOptionDelegate))
 
 
 app.use(
-    "docx",
+    "/docx",
     express.static(path.join(__dirname, "public", "docx"))
 );
 
@@ -41,10 +50,12 @@ app.use((error, req, res, next) => {
     });
 });
 
+
 const init = async () => {
     try {
         // set port, listen for requests
         const PORT = process.env.PORT || 3000;
+        await MessageBroker.getInstance()
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}.`);
         });

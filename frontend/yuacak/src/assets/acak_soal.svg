@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="237.391" height="272.524" viewBox="0 0 237.391 272.524">
+  <g id="acak_soal" transform="translate(-356.305 -360.476)">
+    <g id="shuffle" transform="translate(356.305 309.278)">
+      <g id="Group_8" data-name="Group 8" transform="translate(0 51.197)">
+        <g id="Group_7" data-name="Group 7">
+          <path id="Path_3" data-name="Path 3" d="M234.915,87.5l-.015-.015-.008.008L200.979,53.577a8.478,8.478,0,0,0-11.988,11.988L208.44,85.014H161.082a59.414,59.414,0,0,0-59.346,59.346,42.44,42.44,0,0,1-42.39,42.39H8.479a8.478,8.478,0,1,0,0,16.956H59.346a59.414,59.414,0,0,0,59.346-59.346,42.44,42.44,0,0,1,42.39-42.39H208.44L189,121.41a8.478,8.478,0,0,0,11.78,12.2q.106-.1.208-.208L234.9,99.486A8.478,8.478,0,0,0,234.915,87.5Z" transform="translate(0 -51.197)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Group_10" data-name="Group 10" transform="translate(118.743 152.934)">
+        <g id="Group_9" data-name="Group 9">
+          <path id="Path_4" data-name="Path 4" d="M355.208,292.3l-.015-.015-.008.008-33.912-33.912a8.478,8.478,0,0,0-11.988,11.988l19.449,19.449H281.376a42.328,42.328,0,0,1-28.265-10.793,8.478,8.478,0,0,0-11.31,12.632,59.253,59.253,0,0,0,39.575,15.116h47.358l-19.44,19.44a8.478,8.478,0,0,0,11.779,12.2c.071-.069.14-.138.209-.209l33.912-33.912A8.478,8.478,0,0,0,355.208,292.3Z" transform="translate(-239.036 -255.998)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Group_12" data-name="Group 12" transform="translate(0 85.014)">
+        <g id="Group_11" data-name="Group 11" transform="translate(0 0)">
+          <path id="Path_5" data-name="Path 5" d="M98.921,134.388a59.253,59.253,0,0,0-39.575-15.116H8.478a8.478,8.478,0,0,0,0,16.956H59.346a42.328,42.328,0,0,1,28.265,10.793,8.478,8.478,0,0,0,11.31-12.633Z" transform="translate(0 -119.272)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <text id="Acak_Soal-2" data-name="Acak Soal" transform="translate(404 623)" fill="#fff" font-size="29" font-family="Poppins-Regular, Poppins"><tspan x="0" y="0">Acak Soal</tspan></text>
+  </g>
+</svg>

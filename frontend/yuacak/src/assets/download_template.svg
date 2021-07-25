@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="293" height="271.747" viewBox="0 0 293 271.747">
+  <g id="download_template" transform="translate(-329 -363.253)">
+    <g id="download" transform="translate(376 363.253)">
+      <g id="Group_2" data-name="Group 2" transform="translate(54.663)">
+        <g id="Group_1" data-name="Group 1">
+          <path id="Path_1" data-name="Path 1" d="M215.875,80.563a5.509,5.509,0,0,0-5.026-3.237H188.755V5.523A5.525,5.525,0,0,0,183.232,0H161.139a5.525,5.525,0,0,0-5.523,5.523v71.8H133.522a5.521,5.521,0,0,0-4.154,9.158l38.663,44.187a5.511,5.511,0,0,0,8.307,0L215,86.484A5.507,5.507,0,0,0,215.875,80.563Z" transform="translate(-127.998)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Group_4" data-name="Group 4" transform="translate(16 121.513)">
+        <g id="Group_3" data-name="Group 3">
+          <path id="Path_2" data-name="Path 2" d="M159.607,352v33.14H38.093V352H16v44.187a11.044,11.044,0,0,0,11.047,11.047H170.654A11.037,11.037,0,0,0,181.7,396.187V352Z" transform="translate(-16 -352)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <text id="Download_Template-2" data-name="Download Template" transform="translate(329 625)" fill="#fff" font-size="29" font-family="Poppins-Regular, Poppins"><tspan x="0" y="0">Download Template</tspan></text>
+  </g>
+</svg>
