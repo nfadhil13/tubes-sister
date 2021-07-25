@@ -25,7 +25,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
         )
       );
     }
-
+    console.log("Jumlah soal adalah " + jumlahSoal)
     for (let i = 0; i < jumlahSoal; i++) {
       tabel.push(
         new Table({
