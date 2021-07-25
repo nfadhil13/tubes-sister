@@ -55,12 +55,14 @@ exports.acakSoal = async (req, res, next) => {
         res.json({
             message: `hasil acak soal akan dikirim ke ${email}`
         })
+        const  publicFileURL = `http://localhost:3000/docx/${req.file.filename}`
         const broker = await MessageBroker.getInstance()
-        await broker.sendMessage("soalserivce/generate-template", Buffer.from(JSON.stringify({
+        await broker.sendMessage("soalservice/acakSoal", Buffer.from(JSON.stringify({
             email,
             jumlahAcak,
-            urlFile: filePath
+            urlFile: publicFileURL
         })))
+        console.log("Berhasil mengirim message")
     }catch (e) {
         if(filePath!=null){
             deleteImage(filePath)

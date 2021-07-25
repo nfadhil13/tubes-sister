@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.5.5",
+    "amqplib": "^0.8.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "docx": "^6.0.3",
@@ -24,6 +25,7 @@
     "shuffle-array": "^1.0.1",
     "strip-html-comments": "^1.0.0",
     "tabletojson": "^2.0.7",
+    "underscore": "^1.13.1",
     "uuid": "^8.3.2"
   }
 }

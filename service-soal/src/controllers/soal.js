@@ -3,18 +3,15 @@ const downloadFile = require("../util/docxExtractorFromTemplate");
 const shuffle = require("shuffle-array");
 const fs = require("fs");
 var AdmZip = require("adm-zip");
+const MessageBroker = require("../util/rabbitmq/MessageBroker")
 const axios = require("axios").default;
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
 
 const columnWidth = [612, 2091, 6111];
 
-exports.generateTemplate = async (req, res, next) => {
+exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
   try {
-    const jumlahSoal = req.body.jumlahSoal || 40;
-    const jumlahPilihan = req.body.pilihanJawaban || 5;
-    const email = req.body.email;
-
     const tabel = [];
     const pilihan = [];
 
@@ -57,20 +54,17 @@ exports.generateTemplate = async (req, res, next) => {
       buffer
     );
 
-    const result = await axios.post(
-      process.env.BASE_SERVICE_EMAIL + "/email/send-template",
-      {
-        urlFile: `http://localhost:5002/template/template-soal(${email}).docx`,
-        email: email
-      }
-    );
-
-    res.status(200).json({
-      message: "Sukses generate template",
-      data: result.data
-    });
+    const broker = await MessageBroker.getInstance()
+    await broker.sendMessage("emailService/template-soal", Buffer.from(JSON.stringify(
+          {
+            urlFile: `http://localhost:5002/template/template-soal(${email}).docx`,
+            email: email
+          }
+    )))
+    return true
   } catch (error) {
-    next(error);
+    console.log(error)
+    return false
   }
 };
 
@@ -106,11 +100,8 @@ const createRow = (contentCol1, contentCol2, contentCol3) => {
   }
 };
 
-exports.acakSoal = async (req, res, next) => {
+exports.acakSoal = async (email,docxURL,jumlahAcakan) => {
   try {
-    const email = req.body.email;
-    const docxURL = req.body.docxURL;
-    const jumlahAcakan = req.body.totalAcak;
     const defaultSoal = await downloadFile.extractDocxFromURL(docxURL);
     const finalResult = [];
     for (let i = 0; i < jumlahAcakan; i++) {
@@ -131,20 +122,19 @@ exports.acakSoal = async (req, res, next) => {
 
     zip.writeZip(`public/docx/hasil-acak/hasil-acak-soal(${email}).zip`);
 
-    const result = await axios.post(
-      process.env.BASE_SERVICE_EMAIL + "/email/send-acak",
-      {
-        urlFile: `http://localhost:5002/docx/hasil-acak-soal(${email}).zip`,
-        email: email
-      }
-    );
+    console.log("mengirim acak soal")
 
-    res.json({
-      resultEmail: result.data,
-      finalResult
-    });
+    const broker = await MessageBroker.getInstance()
+    await broker.sendMessage("emailService/acak-soal", Buffer.from(JSON.stringify(
+        {
+          urlFile: `http://localhost:5002/docx/hasil-acak-soal(${email}).zip`,
+          email: email
+        }
+    )))
+    return true
   } catch (e) {
-    next(e);
+    console.log(e)
+    return false
   }
 };
 

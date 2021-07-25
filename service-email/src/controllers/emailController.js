@@ -1,9 +1,7 @@
 const mailUtil = require("../utils/mail");
 
-exports.sendUrlTemplateSoal = async (req, res, next) => {
+exports.sendUrlTemplateSoal = async (urlFile,emailRecipient) => {
   try {
-    const urlFile = req.body.urlFile;
-    const emailRecipient = req.body.email;
     const resultSendEmail = await mailUtil.sendUrlTemplateSoal(
       urlFile,
       emailRecipient
@@ -11,19 +9,15 @@ exports.sendUrlTemplateSoal = async (req, res, next) => {
     if (resultSendEmail instanceof Error) {
       throw resultSendEmail;
     }
-    res.status(200).json({
-      message: `Sukses mengirim url file ke email ${emailRecipient}`,
-      data: resultSendEmail
-    });
+    return true
   } catch (error) {
-    next(error);
+    console.log(error)
+    return false
   }
 };
 
-exports.sendUrlAcakSoal = async (req, res, next) => {
+exports.sendUrlAcakSoal = async (urlFile, emailRecipient) => {
   try {
-    const urlFile = req.body.urlFile;
-    const emailRecipient = req.body.email;
     const resultSendEmail = await mailUtil.sendUrlAcakSoal(
       urlFile,
       emailRecipient
@@ -31,11 +25,9 @@ exports.sendUrlAcakSoal = async (req, res, next) => {
     if (resultSendEmail instanceof Error) {
       throw resultSendEmail;
     }
-    res.status(200).json({
-      message: `Sukses mengirim url file ke email ${emailRecipient}`,
-      data: resultSendEmail
-    });
+    return true
   } catch (error) {
-    next(error);
+    console.log(error)
+    return false
   }
 };
