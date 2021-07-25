@@ -48,6 +48,8 @@ const downloadFile = async (fileUrl, outputLocationPath) => {
 
 const fromWebPageParser = async (htmlFile) => {
   const html = await fs.promises.readFile(htmlFile, "utf8");
+  console.log("html adalah")
+  console.log(html)
   const htmlNoClass = await deleteAllClassFromHtmlString(html);
   const extracted = tableToJSON.Tabletojson.convert(htmlNoClass);
   const kunjawIndex = extracted[0].length - 1;
