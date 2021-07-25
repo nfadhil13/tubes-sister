@@ -120,7 +120,7 @@ exports.acakSoal = async (email, docxURL, jumlahAcakan) => {
     const zip = new AdmZip();
 
     for (const fileName of listFileName) {
-      zip.addLocalFile(`public/docx/hasil-acak/${fileName}`);
+      zip.addLocalFile(__dirname + `public/docx/hasil-acak/${fileName}`);
     }
 
     zip.writeZip(
