@@ -50,7 +50,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     const buffer = await Packer.toBuffer(doc);
 
     fs.writeFileSync(
-      __dirname + `/public/docx/template-soal/template-soal(${email}).docx`,
+      `./public/docx/template-soal/template-soal(${email}).docx`,
       buffer
     );
 
