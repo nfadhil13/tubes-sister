@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const emailRoute = require("./routes/emailRoute");
 const MessageBroker = require("./utils/rabbitmq/MessageBroker");
 const emailController = require("./controllers/emailController");
+
 const app = express();
 
 app.use(cors());
