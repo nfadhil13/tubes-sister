@@ -52,10 +52,11 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
 
     const buffer = await Packer.toBuffer(doc);
 
+    const fileName = uuid.v4()
     fs.writeFileSync(
       path.join(
         __dirname,
-        `../../public/docx/template-soal/template-soal(${uuid.v4()}).docx`
+        `../../public/docx/template-soal/template-soal(${fileName}).docx`
       ),
       buffer
     );
@@ -65,7 +66,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
       "emailService/template-soal",
       Buffer.from(
         JSON.stringify({
-          urlFile: `https://service-soal.nfadhil.me/template/template-soal(${uuid.v4()}).docx`,
+          urlFile: `https://service-soal.nfadhil.me/template/template-soal(${fileName}).docx`,
           email: email
         })
       )
