@@ -54,7 +54,7 @@ app.use((error, req, res, next) => {
 const init = async () => {
     try {
         // set port, listen for requests
-        const PORT = process.env.PORT || 3000;
+        const PORT = process.env.PORT || 5003;
         await MessageBroker.getInstance()
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}.`);

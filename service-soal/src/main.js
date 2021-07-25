@@ -32,7 +32,7 @@ app.use((error, req, res, next) => {
 });
 
 const startServer =  async  () => {
-  const PORT = process.env.SERVER_PORT || "3000";
+  const PORT = process.env.SERVER_PORT || "5001";
   const messageBroker = await MessageBroker.getInstance()
   await messageBroker.subscribe("soalserivce/generate-template",(msg, ack) => {
     try{
