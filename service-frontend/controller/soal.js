@@ -55,7 +55,7 @@ exports.acakSoal = async (req, res, next) => {
         res.json({
             message: `hasil acak soal akan dikirim ke ${email}`
         })
-        const  publicFileURL = `http://localhost:3000/docx/${req.file.filename}`
+        const  publicFileURL = `https://service-frontend.nfadhil.me/docx/${req.file.filename}`
         const broker = await MessageBroker.getInstance()
         await broker.sendMessage("soalservice/acakSoal", Buffer.from(JSON.stringify({
             email,

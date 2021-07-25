@@ -57,7 +57,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     const broker = await MessageBroker.getInstance()
     await broker.sendMessage("emailService/template-soal", Buffer.from(JSON.stringify(
           {
-            urlFile: `http://localhost:5002/template/template-soal(${email}).docx`,
+            urlFile: `https://service-soal.nfadhil.me/template/template-soal(${email}).docx`,
             email: email
           }
     )))
@@ -127,7 +127,7 @@ exports.acakSoal = async (email,docxURL,jumlahAcakan) => {
     const broker = await MessageBroker.getInstance()
     await broker.sendMessage("emailService/acak-soal", Buffer.from(JSON.stringify(
         {
-          urlFile: `http://localhost:5002/docx/hasil-acak-soal(${email}).zip`,
+          urlFile: `https://service-soal.nfadhil.me/docx/hasil-acak-soal(${email}).zip`,
           email: email
         }
     )))

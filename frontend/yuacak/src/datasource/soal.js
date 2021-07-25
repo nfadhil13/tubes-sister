@@ -3,7 +3,7 @@ import errorHandler from "./errorHandler";
 
 const generateTemplate = async (email, totalSoal, totalPilihan) => {
     try{
-        await axios.post("http://localhost:3000/generate-soal",{
+        await axios.post("https://service-frontend.nfadhil.me/generate-soal",{
             email,
             totalSoal,
             totalPilihan,
@@ -17,7 +17,7 @@ const generateTemplate = async (email, totalSoal, totalPilihan) => {
 
 const acakSoal = async (data) => {
     try{
-        await axios.post("http://localhost:3000/acak-soal", data)
+        await axios.post("https://service-frontend.nfadhil.me/acak-soal", data)
         return true
     }catch (e) {
         return await errorHandler.errorHandler(e)
