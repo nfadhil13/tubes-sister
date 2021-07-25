@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const emailRoute = require("./routes/emailRoute");
-const MessageBroker = require("./utils/rabbitmq/MessageBroker")
-const emailController = require("./controllers/emailController")
+const MessageBroker = require("./utils/rabbitmq/MessageBroker");
+const emailController = require("./controllers/emailController");
 const app = express();
 
 app.use(cors());
@@ -28,40 +28,41 @@ app.use((error, req, res, next) => {
 });
 
 const startServer = async () => {
-  const PORT = process.env.SERVER_PORT || "3000";
-  const messageBroker = await MessageBroker.getInstance()
-  await messageBroker.subscribe("emailService/template-soal",(msg, ack) => {
-    try{
-      const input = JSON.parse(msg.content.toString())
-      emailController.sendUrlTemplateSoal(input.urlFile, input.email)
-          .then((result) => {
-            if(result){
-              ack()
-            }
-          }).catch((err) => {
-
-      })
-    }catch (e){
-      console.log(e)
+  const PORT = process.env.SERVER_PORT || 5002;
+  const messageBroker = await MessageBroker.getInstance();
+  await messageBroker.subscribe("emailService/template-soal", (msg, ack) => {
+    try {
+      const input = JSON.parse(msg.content.toString());
+      emailController
+        .sendUrlTemplateSoal(input.urlFile, input.email)
+        .then((result) => {
+          if (result) {
+            ack();
+          }
+        })
+        .catch((err) => {});
+    } catch (e) {
+      console.log(e);
     }
-  })
+  });
   await messageBroker.subscribe("emailService/acak-soal", (msg, ack) => {
-    try{
-      console.log("=================================")
-      console.log("Acak Soal")
-      console.log(msg.content.toString())
-      const input = JSON.parse(msg.content.toString())
-      emailController.sendUrlAcakSoal(input.urlFile, input.email)
-          .then((result) => {
-            if(result){
-              ack()
-            }
-          }).catch((err) => {
-      })
-    }catch (e){
-      console.log(e)
+    try {
+      console.log("=================================");
+      console.log("Acak Soal");
+      console.log(msg.content.toString());
+      const input = JSON.parse(msg.content.toString());
+      emailController
+        .sendUrlAcakSoal(input.urlFile, input.email)
+        .then((result) => {
+          if (result) {
+            ack();
+          }
+        })
+        .catch((err) => {});
+    } catch (e) {
+      console.log(e);
     }
-  })
+  });
   app.listen(PORT, () => {
     console.log(`Service Email listening at PORT ${PORT}`);
   });
