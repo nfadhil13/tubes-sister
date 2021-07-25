@@ -53,7 +53,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     fs.writeFileSync(
       path.join(
         __dirname,
-        `/public/docx/template-soal/template-soal(${email}).docx`
+        `../../public/docx/template-soal/template-soal(${email}).docx`
       ),
       buffer
     );
