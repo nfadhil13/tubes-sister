@@ -132,10 +132,11 @@ exports.acakSoal = async (email, docxURL, jumlahAcakan) => {
       );
     }
 
+    const fileName = uuid.v4()
     zip.writeZip(
       path.join(
         __dirname,
-        `../../public/docx/hasil-acak/hasil-acak-soal(${email}).zip`
+        `../../public/docx/hasil-acak/hasil-acak-soal(${fileName}).zip`
       )
     );
 
@@ -146,7 +147,7 @@ exports.acakSoal = async (email, docxURL, jumlahAcakan) => {
       "emailService/acak-soal",
       Buffer.from(
         JSON.stringify({
-          urlFile: `https://service-soal.nfadhil.me/docx/hasil-acak-soal(${email}).zip`,
+          urlFile: `https://service-soal.nfadhil.me/docx/hasil-acak-soal(${fileName}).zip`,
           email: email
         })
       )
