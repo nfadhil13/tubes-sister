@@ -116,3 +116,9 @@ db.config.js
 rest.http
 
 *.docx
+
+service-soal/public/docx/original/extracted
+
+service-soal/public/docx/original/zip
+
+*.zip

@@ -2,6 +2,7 @@ const docx = require("docx");
 const downloadFile = require("../util/docxExtractorFromTemplate");
 const shuffle = require("shuffle-array");
 const fs = require("fs");
+var AdmZip = require("adm-zip");
 const axios = require("axios").default;
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
@@ -120,9 +121,26 @@ exports.acakSoal = async (req, res, next) => {
       // console.log(shuffleResult);
       finalResult.push(shuffleResult);
     }
-    await generateRandomizeResult(finalResult, email);
+    const listFileName = await generateRandomizeResult(finalResult, email);
+
+    const zip = new AdmZip();
+
+    for (const fileName of listFileName) {
+      zip.addLocalFile(`public/docx/hasil-acak/${fileName}`);
+    }
+
+    zip.writeZip(`public/docx/hasil-acak/hasil-acak-soal(${email}).zip`);
+
+    const result = await axios.post(
+      process.env.BASE_SERVICE_EMAIL + "/email/send-acak",
+      {
+        urlFile: `http://localhost:5002/docx/hasil-acak-soal(${email}).zip`,
+        email: email
+      }
+    );
 
     res.json({
+      resultEmail: result.data,
       finalResult
     });
   } catch (e) {
@@ -132,6 +150,7 @@ exports.acakSoal = async (req, res, next) => {
 
 const generateRandomizeResult = async (soalCollection, email) => {
   try {
+    const listNameFile = [];
     // ini iterasi untuk kumpulan soal nya (1 array 1 docx)
     for (const [l, soal] of soalCollection.entries()) {
       //ini iterasi untuk butir soalnya
@@ -176,11 +195,13 @@ const generateRandomizeResult = async (soalCollection, email) => {
 
       let buffer = await Packer.toBuffer(doc);
 
-      fs.writeFileSync(
-        `public/docx/hasil-acak/hasil-acak-paket${l + 1}(${email}).docx`,
-        buffer
-      );
+      let docName = `hasil-acak-paket${l + 1}(${email}).docx`;
+
+      listNameFile.push(docName);
+
+      fs.writeFileSync(`public/docx/hasil-acak/${docName}`, buffer);
     }
+    return listNameFile;
   } catch (error) {
     console.log(error);
   }

@@ -34,6 +34,22 @@ exports.sendUrlTemplateSoal = async (urlSoal, recipient) => {
   });
 };
 
+exports.sendUrlAcakSoal = async (urlSoal, recipient) => {
+  const address = {
+    name: "Admin Yuk Acak",
+    address: process.env.EMAIL
+  };
+  return await transporter.sendMail({
+    from: address,
+    to: recipient,
+    subject: "File Hasil Pengacakan Soal",
+    template: "send",
+    context: {
+      urlFile: urlSoal
+    }
+  });
+};
+
 const handlebarOptions = {
   viewEngine: {
     extName: ".handlebars",
