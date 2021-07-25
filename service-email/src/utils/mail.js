@@ -53,11 +53,11 @@ exports.sendUrlAcakSoal = async (urlSoal, recipient) => {
 const handlebarOptions = {
   viewEngine: {
     extName: ".handlebars",
-    partialsDir: "src/utils/views/partials",
-    layoutsDir: "src/utils/views/layouts",
+    partialsDir: "utils/views/partials",
+    layoutsDir: "utils/views/layouts",
     defaultLayout: ""
   },
-  viewPath: "src/utils/views/template",
+  viewPath: "utils/views/template",
   extName: ".handlebars"
 };
 
