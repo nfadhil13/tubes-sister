@@ -9,8 +9,20 @@ const columnWidth = [612, 2091, 6111];
 exports.generateTemplate = async (req, res, next) => {
   try {
     const jumlahSoal = req.body.jumlahSoal || 40;
+    const jumlahPilihan = req.body.pilihanJawaban || 5;
 
     const tabel = [];
+    const pilihan = [];
+
+    for (let j = 0; j < jumlahPilihan; j++) {
+      pilihan.push(
+        createRow(
+          ``,
+          `${String.fromCharCode(65 + j)}`,
+          `<Tulis opsi jawaban ${String.fromCharCode(65 + j)}>`
+        )
+      );
+    }
 
     for (let i = 0; i < jumlahSoal; i++) {
       tabel.push(
@@ -18,11 +30,7 @@ exports.generateTemplate = async (req, res, next) => {
           columnWidths: columnWidth,
           rows: [
             createRow(`${i + 1}`, "Pertanyaan", "<Tulis pertanyaan di sini>"),
-            createRow(``, "A", "<Tulis opsi jawaban A>"),
-            createRow(``, "B", "<Tulis opsi jawaban B>"),
-            createRow(``, "C", "<Tulis opsi jawaban C>"),
-            createRow(``, "D", "<Tulis opsi jawaban D>"),
-            createRow(``, "E", "<Tulis opsi jawaban E>"),
+            ...pilihan,
             createRow(``, "Kunci", "<Tulis kunci jawaban (abjad nya saja)>")
           ]
         })
