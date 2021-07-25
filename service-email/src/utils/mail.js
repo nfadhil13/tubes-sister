@@ -18,15 +18,15 @@ transporter.verify((err, success) => {
   console.log("nodemailer config is correct");
 });
 
-exports.sendUrlSoal = async (urlSoal, recipient) => {
+exports.sendUrlTemplateSoal = async (urlSoal, recipient) => {
   const address = {
-    name: "Admin Soal",
+    name: "Admin Yuk Acak",
     address: process.env.EMAIL
   };
   return await transporter.sendMail({
     from: address,
     to: recipient,
-    subject: "File Soal",
+    subject: "File Template Soal",
     template: "sendUrlFile",
     context: {
       urlFile: urlSoal

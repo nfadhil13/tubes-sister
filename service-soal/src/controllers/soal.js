@@ -1,6 +1,8 @@
 const docx = require("docx");
 const downloadFile = require("../util/docxExtractorFromTemplate");
 const shuffle = require("shuffle-array");
+const fs = require("fs");
+const axios = require("axios").default;
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
 
@@ -10,6 +12,7 @@ exports.generateTemplate = async (req, res, next) => {
   try {
     const jumlahSoal = req.body.jumlahSoal || 40;
     const jumlahPilihan = req.body.pilihanJawaban || 5;
+    const email = req.body.email;
 
     const tabel = [];
     const pilihan = [];
@@ -46,13 +49,25 @@ exports.generateTemplate = async (req, res, next) => {
       ]
     });
 
-    const b64string = await Packer.toBase64String(doc);
+    const buffer = await Packer.toBuffer(doc);
 
-    res.setHeader(
-      "Content-Disposition",
-      "attachment; filename=template-soal.docx"
+    fs.writeFileSync(
+      `public/docx/template-soal/template-soal(${email}).docx`,
+      buffer
     );
-    res.send(Buffer.from(b64string, "base64"));
+
+    const result = await axios.post(
+      process.env.BASE_SERVICE_EMAIL + "/email/send-template",
+      {
+        urlFile: `http://localhost:5002/template/template-soal(${email}).docx`,
+        email: email
+      }
+    );
+
+    res.status(200).json({
+      message: "Sukses generate template",
+      data: result.data
+    });
   } catch (error) {
     next(error);
   }

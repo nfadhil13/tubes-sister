@@ -8,10 +8,9 @@ const app = express();
 
 app.use(cors());
 
-app.use(
-  "docx",
-  express.static(path.join(__dirname, "public", "docx", "hasil-acak"))
-);
+app.use("/template", express.static("public/docx/template-soal"));
+
+app.use("/docx", express.static("public/docx/hasil-acak"));
 
 app.use(express.json());
 

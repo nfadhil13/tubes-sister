@@ -1,10 +1,13 @@
 const mailUtil = require("../utils/mail");
 
-exports.sendUrlFile = async (req, res, next) => {
+exports.sendUrlTemplateSoal = async (req, res, next) => {
   try {
     const urlFile = req.body.urlFile;
     const emailRecipient = req.body.email;
-    const resultSendEmail = await mailUtil.sendUrlSoal(urlFile, emailRecipient);
+    const resultSendEmail = await mailUtil.sendUrlTemplateSoal(
+      urlFile,
+      emailRecipient
+    );
     if (resultSendEmail instanceof Error) {
       throw resultSendEmail;
     }
