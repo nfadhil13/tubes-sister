@@ -33,8 +33,12 @@ app.use((error, req, res, next) => {
 const startServer = async () => {
   const PORT = process.env.SERVER_PORT || 5002;
   const messageBroker = await MessageBroker.getInstance();
+
   await messageBroker.subscribe("emailService/template-soal", (msg, ack) => {
     try {
+      console.log("=================================");
+      console.log("Generate template soal");
+      console.log(msg.content.toString());
       const input = JSON.parse(msg.content.toString());
       emailController
         .sendUrlTemplateSoal(input.urlFile, input.email)
