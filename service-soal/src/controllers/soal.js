@@ -5,6 +5,7 @@ const fs = require("fs");
 var AdmZip = require("adm-zip");
 const MessageBroker = require("../util/rabbitmq/MessageBroker");
 const axios = require("axios").default;
+const uuid = require("uuid")
 const path = require("path");
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
@@ -54,7 +55,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     fs.writeFileSync(
       path.join(
         __dirname,
-        `../../public/docx/template-soal/template-soal(${email}).docx`
+        `../../public/docx/template-soal/template-soal(${uuid.v4()}).docx`
       ),
       buffer
     );
@@ -64,7 +65,7 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
       "emailService/template-soal",
       Buffer.from(
         JSON.stringify({
-          urlFile: `https://service-soal.nfadhil.me/template/template-soal(${email}).docx`,
+          urlFile: `https://service-soal.nfadhil.me/template/template-soal(${uuid.v4()}).docx`,
           email: email
         })
       )
