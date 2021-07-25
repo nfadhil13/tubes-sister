@@ -1,8 +1,10 @@
-const express = require("express")
-const soalController = require("../controllers/soal")
+const express = require("express");
+const soalController = require("../controllers/soal");
 
-const router = express.Router()
+const Router = express.Router();
 
-router.post("/acak", soalController.acakSoal)
+Router.post("/generate-template", soalController.generateTemplate);
 
-module.exports = router
+Router.post("/acak", soalController.acakSoal);
+
+module.exports = Router;
