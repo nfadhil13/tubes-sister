@@ -3,7 +3,7 @@ const downloadFile = require("../util/docxExtractorFromTemplate");
 const shuffle = require("shuffle-array");
 const fs = require("fs");
 var AdmZip = require("adm-zip");
-const MessageBroker = require("../util/rabbitmq/MessageBroker")
+const MessageBroker = require("../util/rabbitmq/MessageBroker");
 const axios = require("axios").default;
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
@@ -50,21 +50,24 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     const buffer = await Packer.toBuffer(doc);
 
     fs.writeFileSync(
-      `public/docx/template-soal/template-soal(${email}).docx`,
+      __dirname + `/public/docx/template-soal/template-soal(${email}).docx`,
       buffer
     );
 
-    const broker = await MessageBroker.getInstance()
-    await broker.sendMessage("emailService/template-soal", Buffer.from(JSON.stringify(
-          {
-            urlFile: `https://service-soal.nfadhil.me/template/template-soal(${email}).docx`,
-            email: email
-          }
-    )))
-    return true
+    const broker = await MessageBroker.getInstance();
+    await broker.sendMessage(
+      "emailService/template-soal",
+      Buffer.from(
+        JSON.stringify({
+          urlFile: `https://service-soal.nfadhil.me/template/template-soal(${email}).docx`,
+          email: email
+        })
+      )
+    );
+    return true;
   } catch (error) {
-    console.log(error)
-    return false
+    console.log(error);
+    return false;
   }
 };
 
@@ -100,7 +103,7 @@ const createRow = (contentCol1, contentCol2, contentCol3) => {
   }
 };
 
-exports.acakSoal = async (email,docxURL,jumlahAcakan) => {
+exports.acakSoal = async (email, docxURL, jumlahAcakan) => {
   try {
     const defaultSoal = await downloadFile.extractDocxFromURL(docxURL);
     const finalResult = [];
@@ -120,21 +123,26 @@ exports.acakSoal = async (email,docxURL,jumlahAcakan) => {
       zip.addLocalFile(`public/docx/hasil-acak/${fileName}`);
     }
 
-    zip.writeZip(`public/docx/hasil-acak/hasil-acak-soal(${email}).zip`);
+    zip.writeZip(
+      __dirname + `public/docx/hasil-acak/hasil-acak-soal(${email}).zip`
+    );
 
-    console.log("mengirim acak soal")
+    console.log("mengirim acak soal");
 
-    const broker = await MessageBroker.getInstance()
-    await broker.sendMessage("emailService/acak-soal", Buffer.from(JSON.stringify(
-        {
+    const broker = await MessageBroker.getInstance();
+    await broker.sendMessage(
+      "emailService/acak-soal",
+      Buffer.from(
+        JSON.stringify({
           urlFile: `https://service-soal.nfadhil.me/docx/hasil-acak-soal(${email}).zip`,
           email: email
-        }
-    )))
-    return true
+        })
+      )
+    );
+    return true;
   } catch (e) {
-    console.log(e)
-    return false
+    console.log(e);
+    return false;
   }
 };
 
@@ -189,7 +197,10 @@ const generateRandomizeResult = async (soalCollection, email) => {
 
       listNameFile.push(docName);
 
-      fs.writeFileSync(`public/docx/hasil-acak/${docName}`, buffer);
+      fs.writeFileSync(
+        __dirname + `/public/docx/hasil-acak/${docName}`,
+        buffer
+      );
     }
     return listNameFile;
   } catch (error) {
