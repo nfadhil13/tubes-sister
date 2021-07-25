@@ -124,11 +124,16 @@ exports.acakSoal = async (email, docxURL, jumlahAcakan) => {
     const zip = new AdmZip();
 
     for (const fileName of listFileName) {
-      zip.addLocalFile(__dirname + `public/docx/hasil-acak/${fileName}`);
+      zip.addLocalFile(
+        path.join(__dirname, `../../public/docx/hasil-acak/${fileName}`)
+      );
     }
 
     zip.writeZip(
-      __dirname + `public/docx/hasil-acak/hasil-acak-soal(${email}).zip`
+      path.join(
+        __dirname,
+        `../../public/docx/hasil-acak/hasil-acak-soal(${email}).zip`
+      )
     );
 
     console.log("mengirim acak soal");
@@ -202,7 +207,7 @@ const generateRandomizeResult = async (soalCollection, email) => {
       listNameFile.push(docName);
 
       fs.writeFileSync(
-        __dirname + `/public/docx/hasil-acak/${docName}`,
+        path.join(__dirname, `../../public/docx/hasil-acak/${docName}`),
         buffer
       );
     }
