@@ -5,6 +5,7 @@ const fs = require("fs");
 var AdmZip = require("adm-zip");
 const MessageBroker = require("../util/rabbitmq/MessageBroker");
 const axios = require("axios").default;
+const path = require("path");
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } =
   docx;
 
@@ -50,7 +51,10 @@ exports.generateTemplate = async (jumlahSoal, jumlahPilihan, email) => {
     const buffer = await Packer.toBuffer(doc);
 
     fs.writeFileSync(
-      `./public/docx/template-soal/template-soal(${email}).docx`,
+      path.join(
+        __dirname,
+        `/public/docx/template-soal/template-soal(${email}).docx`
+      ),
       buffer
     );
 
